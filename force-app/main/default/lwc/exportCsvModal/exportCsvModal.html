@@ -1,0 +1,46 @@
+<template>
+
+    <!-- Modal Header -->
+    <lightning-modal-header label="Export Opportunities as CSV">
+    </lightning-modal-header>
+
+    <!-- Modal Body -->
+    <lightning-modal-body>
+
+        <div class="slds-p-around_small">
+
+            <p class="slds-text-body_regular slds-m-bottom_medium">
+                Select the columns you want to include in the CSV file.
+            </p>
+
+            <lightning-checkbox-group
+                name="columnSelection"
+                label="Available Columns"
+                options={columns}
+                value={selectedColumns}
+                onchange={handleSelectionChange}>
+            </lightning-checkbox-group>
+
+        </div>
+
+    </lightning-modal-body>
+
+    <!-- Modal Footer -->
+    <lightning-modal-footer>
+
+        <lightning-button
+            label="Cancel"
+            onclick={handleCancel}>
+        </lightning-button>
+
+        <lightning-button
+            class="slds-m-left_small"
+            variant="brand"
+            label="Export CSV"
+            onclick={handleExport}
+            disabled={isExportDisabled}>
+        </lightning-button>
+
+    </lightning-modal-footer>
+
+</template>

@@ -1,0 +1,71 @@
+<template>
+    <lightning-card title="Opportunity Search" icon-name="standard:opportunity">
+
+        <!-- Spinner -->
+        <template if:true={isLoading}>
+            <lightning-spinner
+                alternative-text="Loading Opportunities"
+                size="medium">
+            </lightning-spinner>
+        </template>
+
+        <div class="slds-p-around_medium">
+
+            <!-- Search Box -->
+            <lightning-input
+                type="search"
+                label="Search Opportunities"
+                placeholder="Type to search by Description, Amount, Close Date or Account Name..."
+                value={searchKey}
+                onchange={handleSearchChange}>
+            </lightning-input>
+
+            <!-- Export Button -->
+            <div class="slds-m-top_medium slds-text-align_right">
+                <lightning-button
+                    label="Export CSV"
+                    icon-name="utility:download"
+                    variant="success"
+                    onclick={handleExport}
+                    disabled={isExportDisabled}>
+                </lightning-button>
+            </div>
+
+            <!-- Results -->
+            <template if:true={opportunities.length}>
+                <div class="slds-m-top_large">
+                    <lightning-datatable
+                        key-field="Id"
+                        data={opportunities}
+                        columns={columns}
+                        hide-checkbox-column
+                        show-row-number-column>
+                    </lightning-datatable>
+                </div>
+            </template>
+
+            <!-- Empty State -->
+            <template if:false={opportunities.length}>
+                <div class="slds-box slds-theme_default slds-m-top_large slds-text-align_center">
+
+                    <lightning-icon
+                        icon-name="utility:search"
+                        size="small"
+                        class="slds-m-bottom_small">
+                    </lightning-icon>
+
+                    <p class="slds-text-heading_small">
+                        Search opportunities to view results.
+                    </p>
+
+                    <p class="slds-text-body_small slds-m-top_x-small">
+                        Results will appear automatically as you type.
+                    </p>
+
+                </div>
+            </template>
+
+        </div>
+
+    </lightning-card>
+</template>
